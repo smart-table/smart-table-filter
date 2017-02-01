@@ -1,6 +1,6 @@
 {
   "name": "smart-table-filter",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "takes a configuration object and returns a filter function operating on arrays",
   "main": "dist/index.js",
   "jsnext:main": "index.js",
