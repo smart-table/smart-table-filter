@@ -53,34 +53,24 @@ function typeExpression (type) {
   }
 }
 
+const not = (fn) => (input) => !fn(input);
+
+const is = value => input => Object.is(value, input);
+const lt = value => input => input < value;
+const gt = value => input => input > value;
+const equals = value => input => value == input;
+const includes = value => input => input.includes(value);
+
 const operators = {
-  includes(value){
-    return (input) => input.includes(value);
-  },
-  is(value){
-    return (input) => Object.is(value, input);
-  },
-  isNot(value){
-    return (input) => !Object.is(value, input);
-  },
-  lt(value){
-    return (input) => input < value;
-  },
-  gt(value){
-    return (input) => input > value;
-  },
-  lte(value){
-    return (input) => input <= value;
-  },
-  gte(value){
-    return (input) => input >= value;
-  },
-  equals(value){
-    return (input) => value == input;
-  },
-  notEquals(value){
-    return (input) => value != input;
-  }
+  includes,
+  is,
+  isNot: compose(is, not),
+  lt,
+  gte: compose(lt, not),
+  gt,
+  lte: compose(gt, not),
+  equals,
+  notEquals: compose(equals, not)
 };
 
 const every = fns => (...args) => fns.every(fn => fn(...args));
