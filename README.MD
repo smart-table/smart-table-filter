@@ -1,5 +1,7 @@
 # smart-table-filter
 
+[![CircleCI](https://circleci.com/gh/smart-table/smart-table-filter.svg?style=svg)](https://circleci.com/gh/smart-table/smart-table-filter)
+
 Takes a configuration object and returns a filter function operating on arrays. It will return a new array leaving the input array untouched. It work on nested property as well. For nodejs and browsers.
 
 ## Installation
