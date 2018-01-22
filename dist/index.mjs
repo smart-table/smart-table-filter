@@ -1,11 +1,5 @@
-'use strict';
-
-Object.defineProperty(exports, '__esModule', { value: true });
-
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
-
-var smartTableOperators = require('smart-table-operators');
-var pointer = _interopDefault(require('smart-table-json-pointer'));
+import { compose } from 'smart-table-operators';
+import pointer from 'smart-table-json-pointer';
 
 function typeExpression (type) {
   switch (type) {
@@ -16,7 +10,7 @@ function typeExpression (type) {
     case 'date':
       return (val) => new Date(val);
     default:
-      return smartTableOperators.compose(String, (val) => val.toLowerCase());
+      return compose(String, (val) => val.toLowerCase());
   }
 }
 
@@ -31,22 +25,22 @@ const includes = value => input => input.includes(value);
 const operators = {
   includes,
   is,
-  isNot: smartTableOperators.compose(is, not),
+  isNot: compose(is, not),
   lt,
-  gte: smartTableOperators.compose(lt, not),
+  gte: compose(lt, not),
   gt,
-  lte: smartTableOperators.compose(gt, not),
+  lte: compose(gt, not),
   equals,
-  notEquals: smartTableOperators.compose(equals, not)
+  notEquals: compose(equals, not)
 };
 
 const every = fns => (...args) => fns.every(fn => fn(...args));
 
 function predicate ({value = '', operator = 'includes', type = 'string'}) {
   const typeIt = typeExpression(type);
-  const operateOnTyped = smartTableOperators.compose(typeIt, operators[operator]);
+  const operateOnTyped = compose(typeIt, operators[operator]);
   const predicateFunc = operateOnTyped(value);
-  return smartTableOperators.compose(typeIt, predicateFunc);
+  return compose(typeIt, predicateFunc);
 }
 
 //avoid useless filter lookup (improve perf)
@@ -67,12 +61,12 @@ function filter (filter) {
   const funcList = Object.keys(normalizedClauses).map(path => {
     const getter = pointer(path).get;
     const clauses = normalizedClauses[path].map(predicate);
-    return smartTableOperators.compose(getter, every(clauses));
+    return compose(getter, every(clauses));
   });
   const filterPredicate = every(funcList);
 
   return (array) => array.filter(filterPredicate);
 }
 
-exports.predicate = predicate;
-exports['default'] = filter;
+export { predicate };
+export default filter;
