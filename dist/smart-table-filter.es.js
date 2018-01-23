@@ -1,6 +1,3 @@
-var smartTableFilter = (function (exports) {
-'use strict';
-
 const compose = (first, ...fns) => (...args) => fns.reduce((previous, current) => current(previous), first(...args));
 
 function pointer(path) {
@@ -102,10 +99,6 @@ function filter(filter) {
 	return array => array.filter(filterPredicate);
 }
 
-exports.predicate = predicate;
-exports['default'] = filter;
-
-return exports;
-
-}({}));
-//# sourceMappingURL=smart-table-filter.js.map
+export { predicate };
+export default filter;
+//# sourceMappingURL=smart-table-filter.es.js.map
