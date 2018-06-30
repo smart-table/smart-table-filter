@@ -142,6 +142,14 @@ export default zora()
 		t.ok(afterDday(new Date()));
 		t.notOk(afterDday('1918/11/11'));
 	})
+	.test('operator on array: includes', t => {
+		const include1b3 = predicate({value: [1,'B',3], type: 'any', operator: 'arrayIncludes'});
+		t.ok(include1b3(1));
+		t.ok(include1b3('B'));
+		t.ok(include1b3(3));
+		t.notOk(include1b3(4));
+		t.notOk(include1b3('b'));
+	})
 	.test('filter items: string includes', t => {
 		const items = [
 			{foo: 'bar'},

@@ -1,6 +1,6 @@
 {
   "name": "smart-table-filter",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "takes a configuration object and returns a filter function operating on arrays",
   "main": "dist/",
   "module": "dist/index.mjs",
