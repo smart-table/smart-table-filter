@@ -9,10 +9,10 @@ function typeExpression(type) {
 			return Number;
 		case 'date':
 			return val => new Date(val);
-		case 'any':
-			return val => val;
-		default:
+		case 'string':
 			return compose(String, val => val.toLowerCase());
+		default:
+			return val => val;
 	}
 }
 
@@ -23,7 +23,7 @@ const lt = value => input => input < value;
 const gt = value => input => input > value;
 const equals = value => input => value === input;
 const includes = value => input => input.includes(value);
-const arrayIncludes = value => input => value.includes(input);
+const anyOf = value => input => value.includes(input);
 
 const operators = {
 	includes,
@@ -35,7 +35,7 @@ const operators = {
 	lte: compose(gt, not),
 	equals,
 	notEquals: compose(equals, not),
-	arrayIncludes
+	anyOf
 };
 
 const every = fns => (...args) => fns.every(fn => fn(...args));
