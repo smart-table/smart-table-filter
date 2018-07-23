@@ -32,10 +32,12 @@ Predicate object definition keys will be a path to a property in your data items
 Values will be arrays containing the following properties:
 
 * type: the type to force coercion of your data item values (and the predicate value).
-    * string (default)
+    * string
     * boolean
     * number
     * date
+
+If not provided input value and data item value are return as they are
 
 * operator: the operator used to perform the check
     * includes: check whether a string contains a substring (default)
@@ -47,6 +49,7 @@ Values will be arrays containing the following properties:
     * lte: lower than or equal to (<=)
     * equals: loose equality (==)
     * notEqualS: negation of "equals" (!=)
+    * anyOf: check whether a values belongs to a given set of values
     
 * value: the value to be checked against
 
