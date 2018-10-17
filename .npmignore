@@ -1,6 +1,0 @@
-.idea
-.circleci
-test
-node_modules
-rollup
-src

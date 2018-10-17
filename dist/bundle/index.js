@@ -2,10 +2,8 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
-
 var smartTableOperators = require('smart-table-operators');
-var pointer = _interopDefault(require('smart-table-json-pointer'));
+var smartTableJsonPointer = require('smart-table-json-pointer');
 
 var Type;
 (function (Type) {
@@ -81,7 +79,7 @@ const normalizeClauses = (conf) => {
 const filter = (filter) => {
     const normalizedClauses = normalizeClauses(filter);
     const funcList = Object.keys(normalizedClauses).map(path => {
-        const getter = pointer(path).get;
+        const getter = smartTableJsonPointer.pointer(path).get;
         const clauses = normalizedClauses[path].map(predicate);
         return smartTableOperators.compose(getter, every(clauses));
     });

@@ -1,5 +1,5 @@
 import { compose } from 'smart-table-operators';
-import pointer from 'smart-table-json-pointer';
+import { pointer } from 'smart-table-json-pointer';
 
 var Type;
 (function (Type) {

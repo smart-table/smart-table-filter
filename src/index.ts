@@ -1,5 +1,5 @@
 import {compose} from 'smart-table-operators';
-import pointer from 'smart-table-json-pointer';
+import {pointer} from 'smart-table-json-pointer';
 
 enum Type {
     BOOLEAN = 'boolean',
@@ -74,12 +74,12 @@ export const predicate = ({value = '', operator = FilterOperator.INCLUDES, type}
     return compose(typeIt, predicateFunc);
 };
 
-export interface FilterDefinition {
+export interface FilterConfiguration {
     [s: string]: PredicateDefinition[]
 }
 
 // Avoid useless filter lookup (improve perf)
-const normalizeClauses = (conf: FilterDefinition) => {
+const normalizeClauses = (conf: FilterConfiguration) => {
     const output = {};
     const validPath = Object.keys(conf).filter(path => Array.isArray(conf[path]));
     validPath.forEach(path => {
@@ -91,10 +91,10 @@ const normalizeClauses = (conf: FilterDefinition) => {
     return output;
 };
 
-export const filter = <T>(filter: FilterDefinition): (array: T[]) => T[] => {
+export const filter = <T>(filter: FilterConfiguration): (array: T[]) => T[] => {
     const normalizedClauses = normalizeClauses(filter);
     const funcList = Object.keys(normalizedClauses).map(path => {
-        const getter = pointer(path).get;
+        const getter = pointer<T>(path).get;
         const clauses = normalizedClauses[path].map(predicate);
         return compose(getter, every(clauses));
     });
