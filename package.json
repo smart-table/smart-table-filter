@@ -1,10 +1,10 @@
 {
   "name": "smart-table-filter",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "takes a configuration object and returns a filter function operating on arrays",
   "main": "./dist/bundle/index",
   "module": "./dist/src/index.js",
-  "types": "./dist/src/index.d.ts",
+  "types": "./dist/declarations/index.d.ts",
   "scripts": {
     "test:ci": "npm run build && npm test",
     "test": "rollup -c ./test/rollup.config.js | node | tap-diff",
@@ -32,8 +32,8 @@
   },
   "homepage": "https://github.com/smart-table/smart-table-filter#readme",
   "dependencies": {
-    "smart-table-json-pointer": "^2.0.2",
-    "smart-table-operators": "^2.0.7"
+    "smart-table-json-pointer": "^2.0.3",
+    "smart-table-operators": "^2.0.8"
   },
   "devDependencies": {
     "rollup": "^0.63.5",
