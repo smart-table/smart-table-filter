@@ -84,4 +84,4 @@ const filter = (filter) => {
     return array => array.filter(filterPredicate);
 };
 
-export { FilterOperator, predicate, filter };
+export { FilterOperator, filter, predicate };

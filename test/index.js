@@ -1,5 +1,5 @@
-import test from 'zora';
-import {predicate, filter} from '../dist/bundle/module';
+import {test} from 'zora';
+import {filter, predicate} from '../dist/bundle/module';
 
 test('predicate: use includes and string as default parameters', t => {
     const includesFoo = predicate({value: 'foo'});

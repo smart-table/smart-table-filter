@@ -113,8 +113,8 @@ var smartTableSort = (function (exports) {
         return array => array.filter(filterPredicate);
     };
 
-    exports.predicate = predicate;
     exports.filter = filter;
+    exports.predicate = predicate;
 
     return exports;
 
