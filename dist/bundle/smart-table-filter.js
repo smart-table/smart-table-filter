@@ -15,12 +15,12 @@ var smartTableSort = (function (exports) {
             let current = target;
             const [leaf, ...intermediate] = parts.reverse();
             for (const key of intermediate.reverse()) {
-                if (current[key] === undefined) {
+                if (current[key] === void 0) {
                     current[key] = {};
                     current = current[key];
                 }
             }
-            current[leaf] = Object.assign(current[leaf] || {}, newTree);
+            current[leaf] = newTree;
             return target;
         };
         return {

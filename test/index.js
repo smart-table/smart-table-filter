@@ -186,3 +186,13 @@ test('filter items: clauses on nested properties', t => {
     const filtered = filter({foo: [{value: 'swe'}], 'bar.blah': [{operator: 'is', value: 'woo'}]})(items);
     t.deepEqual(filtered, [{foo: 'swe', bar: {blah: 'woo'}}]);
 });
+test('filter items: should not filter anything if no clause is present', t => {
+    const items = [
+        {foo: 'bar', bar: {blah: 'woo'}},
+        {foo: 'swe', bar: {blah: 'woo'}},
+        {foo: 'sweet', bar: {blah: 'wat'}}
+    ];
+    const filtered = filter({})(items);
+    t.deepEqual(filtered, items);
+});
+
